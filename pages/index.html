@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GameStudio</title>
+    <link rel="stylesheet" href="../css-tailwind/output.css" />
+  </head>
+  <body class="min-h-screen bg-slate-950 text-slate-100">
+    <main class="relative isolate overflow-hidden">
+      <div class="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.18),_transparent_40%),linear-gradient(180deg,_rgba(15,23,42,1),_rgba(2,6,23,1))]"></div>
+      <div class="mx-auto flex min-h-screen max-w-5xl items-center px-6 py-16">
+        <section class="w-full rounded-3xl border border-white/10 bg-white/5 p-8 shadow-2xl shadow-sky-950/40 backdrop-blur md:p-12">
+          <div class="inline-flex rounded-full border border-sky-400/30 bg-sky-400/10 px-4 py-2 text-sm font-medium text-sky-200">
+            Tailwind is ready
+          </div>
+          <h1 class="mt-6 max-w-2xl text-4xl font-black tracking-tight text-white md:text-6xl">
+            Build a sharper game studio landing page with Tailwind.
+          </h1>
+          <p class="mt-5 max-w-2xl text-base leading-7 text-slate-300 md:text-lg">
+            This page is linked to the new css-tailwind build pipeline and uses utility classes directly from the generated stylesheet.
+          </p>
+          <div class="mt-8 flex flex-col gap-4 sm:flex-row">
+            <a class="inline-flex items-center justify-center rounded-full bg-sky-400 px-6 py-3 font-semibold text-slate-950 transition hover:bg-sky-300" href="#features">
+              Explore features
+            </a>
+            <a class="inline-flex items-center justify-center rounded-full border border-white/15 bg-white/5 px-6 py-3 font-semibold text-white transition hover:bg-white/10" href="#contact">
+              Contact studio
+            </a>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <section id="features" class="mx-auto grid max-w-5xl gap-6 px-6 pb-16 md:grid-cols-3">
+      <article class="rounded-2xl border border-white/10 bg-slate-900/70 p-6 text-slate-200">
+        <h2 class="text-lg font-semibold text-white">Fast setup</h2>
+        <p class="mt-3 text-sm leading-6 text-slate-300">The CSS source now lives in css-tailwind and can be rebuilt from one command.</p>
+      </article>
+      <article class="rounded-2xl border border-white/10 bg-slate-900/70 p-6 text-slate-200">
+        <h2 class="text-lg font-semibold text-white">Clean HTML</h2>
+        <p class="mt-3 text-sm leading-6 text-slate-300">The page uses plain HTML in pages/ and Tailwind utilities for layout, color, and spacing.</p>
+      </article>
+      <article id="contact" class="rounded-2xl border border-white/10 bg-slate-900/70 p-6 text-slate-200">
+        <h2 class="text-lg font-semibold text-white">Ready to expand</h2>
+        <p class="mt-3 text-sm leading-6 text-slate-300">Add more pages under pages/ and rerun the Tailwind build to include new classes.</p>
+      </article>
+    </section>
+  </body>
+</html>
