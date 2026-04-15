@@ -4,7 +4,7 @@ Will be changed (surelly)
 
 
 Lore
-**Lore fiktivního herního studia (vylepšená, plynulejší verze):**
+**Lore fiktivního herního studia:**
 
 Herní studio **založila parta tří kamarádů** ještě během střední školy – **Tomáš Fuk**, **Zdeněk Botek** a **Petr Petrovič Lej**. Všichni tři byli od malička posedlí hrami, satirou a černým humorem, a tak se rozhodli, že místo dalšího nudného projektu do školy udělají něco vlastního.
 
@@ -34,5 +34,3 @@ Jak se značka postupně etablovala a komunita rostla, studio přešlo z čisté
 Dnes je studio známé jako **odvážný publisher satirických a provokativních her**, který se nebojí dotknout citlivých témat, politiky, náboženství ani aktuálních událostí. Jejich motto by se dalo shrnout asi takto:
 
 „Děláme hry, které by velká studia nikdy nevydala… a přesně proto je lidi hrají.“
-
-Chceš, abych to ještě víc „vyšperkoval“ (temnějším humorem, oficiálnějším tónem, nebo naopak víc memovitě)? Nebo přidat nějaké konkrétní detaily k zakladatelům?
