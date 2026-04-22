@@ -1,0 +1,4 @@
+Primary color: 20132E
+Secondary color: 753BAF
+White text
+Fonts: Underdog
