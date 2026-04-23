@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title id="page-title">Game — Wafle Gamedev</title>
+  <meta name="description" id="page-desc" content="" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Underdog&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css-tailwind/output.css" />
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='28' font-size='28'>🧇</text></svg>" />
+  <style>
+    /* ── Game Detail Page Styles ── */
+    .hero-banner {
+      height: 400px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-banner-gradient {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+    .hero-banner-emoji {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -60%);
+      font-size: 8rem;
+      opacity: 0.15;
+      z-index: 1;
+    }
+    .hero-banner-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 60%;
+      background: linear-gradient(to top, var(--color-wafle-darker) 0%, transparent 100%);
+      z-index: 2;
+    }
+    .hero-banner-content {
+      position: relative;
+      z-index: 3;
+      padding-bottom: 2rem;
+    }
+
+    .detail-description p {
+      color: rgba(255,255,255,0.55);
+      font-size: 1rem;
+      line-height: 1.75;
+      margin-bottom: 1.25rem;
+    }
+
+    .feature-card {
+      background: linear-gradient(135deg, rgba(117,59,175,0.08) 0%, rgba(32,19,46,0.6) 100%);
+      border: 1px solid var(--color-wafle-border);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      transition: all 0.3s ease;
+    }
+    .feature-card:hover {
+      border-color: var(--color-wafle-border-hover);
+      transform: translateY(-4px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.3), 0 0 20px rgba(117,59,175,0.15);
+    }
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(117,59,175,0.2) 0%, rgba(117,59,175,0.05) 100%);
+      border: 1px solid var(--color-wafle-border);
+      font-size: 1.3rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .screenshot-placeholder {
+      aspect-ratio: 16/9;
+      border-radius: 1rem;
+      border: 1px solid var(--color-wafle-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+    .screenshot-placeholder:hover {
+      border-color: var(--color-wafle-border-hover);
+      transform: scale(1.02);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    }
+
+    .review-card {
+      background: linear-gradient(135deg, rgba(117,59,175,0.06) 0%, rgba(32,19,46,0.7) 100%);
+      border: 1px solid var(--color-wafle-border);
+      border-radius: 1rem;
+      padding: 1.75rem;
+      transition: all 0.3s ease;
+    }
+    .review-card:hover {
+      border-color: var(--color-wafle-border-hover);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    }
+
+    .store-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1rem 1.75rem;
+      border-radius: 0.75rem;
+      background: linear-gradient(135deg, rgba(117,59,175,0.15) 0%, rgba(32,19,46,0.6) 100%);
+      border: 1px solid var(--color-wafle-border);
+      color: #c084fc;
+      font-family: "Underdog", cursive;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+    .store-btn:hover {
+      background: linear-gradient(135deg, rgba(117,59,175,0.3) 0%, rgba(32,19,46,0.8) 100%);
+      border-color: var(--color-wafle-border-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(117,59,175,0.2);
+      color: #fff;
+    }
+
+    .credit-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid rgba(117,59,175,0.1);
+    }
+    .credit-row:last-child { border-bottom: none; }
+
+    .star { color: #fbbf24; }
+    .star-empty { color: rgba(255,255,255,0.15); }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: rgba(255,255,255,0.5);
+      font-size: 0.9rem;
+      transition: color 0.3s;
+    }
+    .back-link:hover { color: #c084fc; }
+  </style>
+</head>
+
+<body class="min-h-screen overflow-x-hidden">
+
+  <!-- ═══════════ NAVBAR ═══════════ -->
+  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
+    style="background:rgba(21,12,31,0.85);backdrop-filter:blur(20px);border-bottom:1px solid rgba(117,59,175,0.15);">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+      <div class="flex h-18 items-center justify-between">
+        <a href="index.html" class="flex items-center gap-3 group">
+          <span class="text-2xl transition-transform duration-300 group-hover:scale-110">🧇</span>
+          <span class="text-xl font-bold text-white tracking-wide">Wafle<span class="text-wafle-accent">Gamedev</span></span>
+        </a>
+        <div class="hidden md:flex items-center gap-8">
+          <a href="index.html" class="nav-link">Home</a>
+          <a href="games.html" class="nav-link" style="color:#c084fc;">Games</a>
+          <a href="index.html#about" class="nav-link">About</a>
+          <a href="index.html#values" class="nav-link">Values</a>
+          <a href="index.html#contact" class="nav-link">Contact</a>
+        </div>
+        <button id="menu-toggle" class="md:hidden flex flex-col gap-1.5 p-2 rounded-lg hover:bg-white/5 transition" aria-label="Toggle menu">
+          <span class="block w-6 h-0.5 bg-white/80 rounded transition-all duration-300" id="bar1"></span>
+          <span class="block w-6 h-0.5 bg-white/80 rounded transition-all duration-300" id="bar2"></span>
+          <span class="block w-6 h-0.5 bg-white/80 rounded transition-all duration-300" id="bar3"></span>
+        </button>
+      </div>
+      <div id="mobile-menu" class="mobile-menu md:hidden">
+        <div class="flex flex-col gap-4 py-6 border-t border-wafle-border">
+          <a href="index.html" class="nav-link text-base" onclick="closeMobile()">Home</a>
+          <a href="games.html" class="nav-link text-base" onclick="closeMobile()">Games</a>
+          <a href="index.html#about" class="nav-link text-base" onclick="closeMobile()">About</a>
+          <a href="index.html#values" class="nav-link text-base" onclick="closeMobile()">Values</a>
+          <a href="index.html#contact" class="nav-link text-base" onclick="closeMobile()">Contact</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Content rendered by JS -->
+  <main id="game-content"></main>
+
+  <!-- ═══════════ FOOTER ═══════════ -->
+  <footer class="border-t border-wafle-border bg-wafle-darker/80 backdrop-blur-md">
+    <div class="mx-auto max-w-6xl px-6 lg:px-8 py-12">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
+        <div>
+          <a href="index.html" class="flex items-center gap-2 mb-4">
+            <span class="text-xl">🧇</span>
+            <span class="text-lg font-bold text-white">Wafle<span class="text-wafle-accent">Gamedev</span></span>
+          </a>
+          <p class="text-white/40 text-sm leading-relaxed">Indie game studio & publisher. Bold games for bold players.</p>
+        </div>
+        <div>
+          <h4 class="text-white font-bold text-sm uppercase tracking-wider mb-4">Navigate</h4>
+          <ul class="space-y-2">
+            <li><a href="index.html" class="text-white/40 text-sm hover:text-wafle-accent transition">Home</a></li>
+            <li><a href="games.html" class="text-white/40 text-sm hover:text-wafle-accent transition">Games</a></li>
+            <li><a href="index.html#about" class="text-white/40 text-sm hover:text-wafle-accent transition">About</a></li>
+            <li><a href="index.html#contact" class="text-white/40 text-sm hover:text-wafle-accent transition">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-white font-bold text-sm uppercase tracking-wider mb-4">Legal</h4>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-white/40 text-sm hover:text-wafle-accent transition">Privacy Policy</a></li>
+            <li><a href="#" class="text-white/40 text-sm hover:text-wafle-accent transition">Terms of Service</a></li>
+            <li><a href="#" class="text-white/40 text-sm hover:text-wafle-accent transition">Press Kit</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-white font-bold text-sm uppercase tracking-wider mb-4">Connect</h4>
+          <ul class="space-y-2">
+            <li><a href="mailto:business@waflegamedev.com" class="text-white/40 text-sm hover:text-wafle-accent transition">business@waflegamedev.com</a></li>
+            <li><a href="mailto:press@waflegamedev.com" class="text-white/40 text-sm hover:text-wafle-accent transition">press@waflegamedev.com</a></li>
+            <li><a href="#" class="text-white/40 text-sm hover:text-wafle-accent transition">Discord Community</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="mt-12 pt-8 border-t border-wafle-border flex flex-col sm:flex-row items-center justify-between gap-4">
+        <p class="text-white/30 text-xs">&copy; 2026 Wafle Gamedev. All rights reserved.</p>
+        <p class="text-white/20 text-xs">Made with 🧇 and questionable taste</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ═══════════ SCRIPTS ═══════════ -->
+  <script src="games-data.js"></script>
+  <script>
+    // ── Mobile menu ──
+    const toggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const bar1 = document.getElementById('bar1');
+    const bar2 = document.getElementById('bar2');
+    const bar3 = document.getElementById('bar3');
+    let menuOpen = false;
+
+    toggle.addEventListener('click', () => {
+      menuOpen = !menuOpen;
+      mobileMenu.classList.toggle('open');
+      if (menuOpen) {
+        bar1.style.transform = 'rotate(45deg) translate(4px, 4px)';
+        bar2.style.opacity = '0';
+        bar3.style.transform = 'rotate(-45deg) translate(4px, -4px)';
+      } else {
+        bar1.style.transform = 'none';
+        bar2.style.opacity = '1';
+        bar3.style.transform = 'none';
+      }
+    });
+
+    function closeMobile() {
+      menuOpen = false;
+      mobileMenu.classList.remove('open');
+      bar1.style.transform = 'none';
+      bar2.style.opacity = '1';
+      bar3.style.transform = 'none';
+    }
+
+    // ── Stars helper ──
+    function renderStars(rating) {
+      if (rating === 0) return '<span class="text-white/30 text-sm italic">Preview — Not yet rated</span>';
+      let html = '';
+      for (let i = 1; i <= 5; i++) {
+        if (i <= Math.floor(rating)) html += '<span class="star">★</span>';
+        else if (i - 0.5 <= rating) html += '<span class="star">★</span>';
+        else html += '<span class="star-empty">★</span>';
+      }
+      return html + `<span class="text-white/40 text-sm" style="margin-left:0.5rem">${rating}/5</span>`;
+    }
+
+    // ── Screenshot gradients ──
+    const screenshotGradients = [
+      'linear-gradient(135deg, rgba(117,59,175,0.3) 0%, rgba(32,19,46,0.8) 50%, rgba(117,59,175,0.15) 100%)',
+      'linear-gradient(135deg, rgba(32,19,46,0.8) 0%, rgba(117,59,175,0.25) 50%, rgba(21,12,31,0.9) 100%)',
+      'linear-gradient(135deg, rgba(117,59,175,0.15) 0%, rgba(21,12,31,0.9) 50%, rgba(117,59,175,0.3) 100%)',
+      'linear-gradient(135deg, rgba(21,12,31,0.7) 0%, rgba(117,59,175,0.2) 50%, rgba(32,19,46,0.9) 100%)'
+    ];
+
+    // ── Render game detail page ──
+    function renderGameDetail() {
+      const params = new URLSearchParams(window.location.search);
+      const gameId = params.get('game');
+      const game = gameId ? GAMES_DATA[gameId] : null;
+
+      if (!game) {
+        document.getElementById('game-content').innerHTML = `
+          <section class="relative pt-32 pb-16 overflow-hidden" style="min-height:60vh;display:flex;align-items:center;justify-content:center;">
+            <div class="absolute inset-0 -z-20 bg-wafle-darker"></div>
+            <div class="text-center px-6">
+              <span style="font-size:5rem;display:block;margin-bottom:1rem;">🕹️</span>
+              <h1 class="text-3xl font-bold text-white mb-4">Game Not Found</h1>
+              <p class="text-white/50 mb-8">The game you're looking for doesn't exist or has been removed.</p>
+              <a href="games.html" class="btn-primary">← Back to Games</a>
+            </div>
+          </section>`;
+        return;
+      }
+
+      document.getElementById('page-title').textContent = `${game.title} — Wafle Gamedev`;
+      document.getElementById('page-desc').content = game.description.replace(/<[^>]+>/g, '').substring(0, 160);
+
+      document.getElementById('game-content').innerHTML = `
+        <!-- Hero Banner -->
+        <section class="hero-banner" style="margin-top:72px;">
+          <div class="hero-banner-gradient" style="background:${game.gradient};"></div>
+          <div class="hero-banner-emoji">${game.emoji}</div>
+          <div class="hero-banner-overlay"></div>
+          <div class="hero-banner-content text-center px-6">
+            <span class="badge ${game.statusClass}" style="display:inline-block;margin-bottom:1rem;">${game.status}</span>
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-white tracking-tight">${game.title}</h1>
+            <p class="text-wafle-accent/70 text-sm uppercase tracking-wider" style="margin-top:0.5rem;">${game.genre}</p>
+          </div>
+        </section>
+
+        <!-- Back Link -->
+        <div class="mx-auto max-w-5xl px-6" style="padding-top:2rem;">
+          <a href="games.html" class="back-link">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+            Back to All Games
+          </a>
+        </div>
+
+        <!-- Description -->
+        <section class="section-glow relative py-16">
+          <div class="mx-auto max-w-5xl px-6 lg:px-8">
+            <div class="animate-fade-in-up">
+              <span class="text-wafle-accent text-sm uppercase tracking-widest">About the Game</span>
+              <h2 class="mt-3 text-3xl font-bold text-white" style="margin-bottom:1.5rem;">Description</h2>
+              <div class="detail-description">${game.description}</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Features -->
+        <section class="relative py-16">
+          <div class="absolute top-0 right-0 w-[400px] h-[400px] rounded-full bg-wafle-purple/5 blur-[120px] -z-10"></div>
+          <div class="mx-auto max-w-5xl px-6 lg:px-8">
+            <div class="animate-fade-in-up" style="margin-bottom:2rem;">
+              <span class="text-wafle-accent text-sm uppercase tracking-widest">Gameplay</span>
+              <h2 class="mt-3 text-3xl font-bold text-white">Features</h2>
+            </div>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              ${game.features.map((f, i) => `
+                <div class="feature-card animate-fade-in-up" style="animation-delay:${i * 0.1}s;">
+                  <div class="feature-icon">${f.icon}</div>
+                  <h3 class="text-white font-bold" style="margin-bottom:0.25rem;">${f.title}</h3>
+                  <p class="text-white/45 text-sm leading-relaxed">${f.desc}</p>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        </section>
+
+        <!-- Screenshots -->
+        <section class="section-glow relative py-16">
+          <div class="mx-auto max-w-5xl px-6 lg:px-8">
+            <div class="animate-fade-in-up" style="margin-bottom:2rem;">
+              <span class="text-wafle-accent text-sm uppercase tracking-widest">Media</span>
+              <h2 class="mt-3 text-3xl font-bold text-white">Screenshots</h2>
+            </div>
+            <div class="grid sm:grid-cols-2 gap-6">
+              ${screenshotGradients.map((g, i) => `
+                <div class="screenshot-placeholder animate-fade-in-up" style="background:${g};animation-delay:${i * 0.1}s;">
+                  <div class="text-center" style="padding:2rem;">
+                    <span style="font-size:2.5rem;display:block;margin-bottom:0.5rem;opacity:0.3;">📸</span>
+                    <p class="text-white/25 text-sm">Screenshot ${i + 1}</p>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        </section>
+
+        <!-- Reviews -->
+        <section class="relative py-16">
+          <div class="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full bg-wafle-purple/5 blur-[120px] -z-10"></div>
+          <div class="mx-auto max-w-5xl px-6 lg:px-8">
+            <div class="animate-fade-in-up" style="margin-bottom:2rem;">
+              <span class="text-wafle-accent text-sm uppercase tracking-widest">Press</span>
+              <h2 class="mt-3 text-3xl font-bold text-white">Reviews</h2>
+            </div>
+            <div class="grid md:grid-cols-${Math.min(game.reviews.length, 3)} gap-6">
+              ${game.reviews.map((r, i) => `
+                <div class="review-card animate-fade-in-up" style="animation-delay:${i * 0.15}s;">
+                  <div style="margin-bottom:0.75rem;">${renderStars(r.rating)}</div>
+                  <p class="text-white/55 text-sm leading-relaxed italic" style="margin-bottom:1rem;">"${r.text}"</p>
+                  <p class="text-wafle-accent text-xs uppercase tracking-wider font-bold">— ${r.author}</p>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        </section>
+
+        <!-- Store Links & Credits -->
+        <section class="section-glow relative py-16">
+          <div class="mx-auto max-w-5xl px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12">
+              <!-- Store Links -->
+              <div class="animate-fade-in-up">
+                <span class="text-wafle-accent text-sm uppercase tracking-widest">Get the Game</span>
+                <h2 class="mt-3 text-3xl font-bold text-white" style="margin-bottom:1.5rem;">Download / Purchase</h2>
+                <div style="display:flex;flex-direction:column;gap:0.75rem;">
+                  ${game.storeLinks.map(s => `
+                    <a href="${s.url}" class="store-btn">
+                      <span style="font-size:1.3rem;">${s.icon}</span>
+                      ${s.name}
+                    </a>
+                  `).join('')}
+                </div>
+              </div>
+
+              <!-- Credits -->
+              <div class="animate-fade-in-up" style="animation-delay:0.15s;">
+                <span class="text-wafle-accent text-sm uppercase tracking-widest">Team</span>
+                <h2 class="mt-3 text-3xl font-bold text-white" style="margin-bottom:1.5rem;">Credits</h2>
+                <div class="glass-card rounded-2xl" style="padding:1.5rem;">
+                  ${game.credits.map(c => `
+                    <div class="credit-row">
+                      <span class="text-white/40 text-sm">${c.role}</span>
+                      <span class="text-white font-bold text-sm">${c.name}</span>
+                    </div>
+                  `).join('')}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Back CTA -->
+        <section class="relative py-16">
+          <div class="mx-auto max-w-3xl px-6 text-center animate-fade-in-up">
+            <h2 class="text-3xl font-bold text-white mb-4">Explore More Games</h2>
+            <p class="text-white/50" style="margin-bottom:2rem;">Check out our other satirical, provocative, and experimental titles.</p>
+            <a href="games.html" class="btn-primary">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+              Back to All Games
+            </a>
+          </div>
+        </section>
+      `;
+
+      // Re-run scroll animations
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.animationPlayState = 'running';
+            entry.target.classList.add('animate-fade-in-up');
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+      document.querySelectorAll('.animate-fade-in-up').forEach(el => observer.observe(el));
+    }
+
+    // Render on load
+    renderGameDetail();
+  </script>
+
+</body>
+</html>

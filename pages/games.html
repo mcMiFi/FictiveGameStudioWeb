@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Games — Wafle Gamedev</title>
+  <meta name="description"
+    content="Browse the full catalog of Wafle Gamedev games. From satirical simulations to dark comedy roguelikes — filter by genre, status, and more." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Underdog&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css-tailwind/output.css" />
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='28' font-size='28'>🧇</text></svg>" />
+</head>
+
+<body class="min-h-screen overflow-x-hidden">
+
+  <!-- ═══════════ NAVBAR ═══════════ -->
+  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
+    style="background:rgba(21,12,31,0.85);backdrop-filter:blur(20px);border-bottom:1px solid rgba(117,59,175,0.15);">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+      <div class="flex h-18 items-center justify-between">
+        <a href="index.html" class="flex items-center gap-3 group">
+          <span class="text-2xl transition-transform duration-300 group-hover:scale-110">🧇</span>
+          <span class="text-xl font-bold text-white tracking-wide">Wafle<span
+              class="text-wafle-accent">Gamedev</span></span>
+        </a>
+        <div class="hidden md:flex items-center gap-8">
+          <a href="index.html" class="nav-link">Home</a>
+          <a href="games.html" class="nav-link" style="color:#c084fc;">Games</a>
+          <a href="index.html#about" class="nav-link">About</a>
+          <a href="index.html#values" class="nav-link">Values</a>
+          <a href="index.html#contact" class="nav-link">Contact</a>
+        </div>
+        <button id="menu-toggle" class="md:hidden flex flex-col gap-1.5 p-2 rounded-lg hover:bg-white/5 transition"
+          aria-label="Toggle menu">
+          <span class="block w-6 h-0.5 bg-white/80 rounded transition-all duration-300" id="bar1"></span>
+          <span class="block w-6 h-0.5 bg-white/80 rounded transition-all duration-300" id="bar2"></span>
+          <span class="block w-6 h-0.5 bg-white/80 rounded transition-all duration-300" id="bar3"></span>
+        </button>
+      </div>
+      <div id="mobile-menu" class="mobile-menu md:hidden">
+        <div class="flex flex-col gap-4 py-6 border-t border-wafle-border">
+          <a href="index.html" class="nav-link text-base" onclick="closeMobile()">Home</a>
+          <a href="games.html" class="nav-link text-base" onclick="closeMobile()">Games</a>
+          <a href="index.html#about" class="nav-link text-base" onclick="closeMobile()">About</a>
+          <a href="index.html#values" class="nav-link text-base" onclick="closeMobile()">Values</a>
+          <a href="index.html#contact" class="nav-link text-base" onclick="closeMobile()">Contact</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- ═══════════ HERO BANNER ═══════════ -->
+  <section class="relative pt-32 pb-16 lg:pt-40 lg:pb-20 overflow-hidden">
+    <div class="absolute inset-0 -z-20 bg-wafle-darker"></div>
+    <div class="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_rgba(117,59,175,0.25),_transparent_55%)]">
+    </div>
+    <div class="absolute top-1/3 left-1/4 w-72 h-72 rounded-full bg-wafle-purple/10 blur-[100px] animate-float"></div>
+    <div class="absolute bottom-0 right-1/4 w-96 h-96 rounded-full bg-wafle-purple/8 blur-[120px] animate-float"
+      style="animation-delay:3s;"></div>
+
+    <div class="relative z-10 mx-auto max-w-5xl px-6 text-center">
+      <div
+        class="animate-fade-in-up inline-flex items-center gap-2 rounded-full border border-wafle-purple/30 bg-wafle-purple/10 px-5 py-2 text-sm text-wafle-accent mb-6">
+        <span class="w-2 h-2 rounded-full bg-wafle-accent animate-pulse"></span>
+        Full Catalog
+      </div>
+      <h1
+        class="animate-fade-in-up delay-100 text-4xl sm:text-5xl lg:text-7xl font-bold text-white leading-tight tracking-tight">
+        Our <span class="bg-gradient-to-r from-wafle-purple to-wafle-accent bg-clip-text text-transparent">Games</span>
+      </h1>
+      <p class="animate-fade-in-up delay-200 mt-5 max-w-2xl mx-auto text-lg leading-relaxed text-white/60">
+        From absurd game jam experiments to full indie releases — explore every title we've created and published.
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ═══════════ FILTERS ═══════════ -->
+  <section class="relative py-6">
+    <div class="mx-auto max-w-6xl px-6 lg:px-8">
+      <div class="flex flex-wrap items-center justify-center gap-3 animate-fade-in-up delay-300" id="filters">
+        <!-- Status filters -->
+        <button class="filter-btn active" data-filter="all">All Games</button>
+        <button class="filter-btn" data-filter="game-jam">Game Jam</button>
+        <button class="filter-btn" data-filter="published">Published</button>
+        <button class="filter-btn" data-filter="in-development">In Development</button>
+      </div>
+      <div class="flex items-center justify-center mt-4 animate-fade-in-up delay-400">
+        <span class="text-white/30 text-sm" id="game-count">Showing 8 games</span>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════ GAME CATALOG GRID ═══════════ -->
+  <section id="catalog" class="relative py-12 lg:py-16">
+    <div class="absolute top-0 right-0 w-[500px] h-[500px] rounded-full bg-wafle-purple/5 blur-[150px] -z-10"></div>
+    <div class="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full bg-wafle-purple/5 blur-[120px] -z-10"></div>
+
+    <div class="mx-auto max-w-6xl px-6 lg:px-8">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8" id="games-grid">
+
+        <!-- Game: Babushka -->
+        <a href="game-detail.html?game=babushka" class="game-card animate-fade-in-up" data-status="game-jam" data-genre="simulation" style="text-decoration:none;display:block;">
+          <div class="relative overflow-hidden">
+            <img src="../assets/games/babushka.png" alt="Babushka" class="game-card-image" loading="lazy" />
+            <div class="game-card-overlay"></div>
+            <div class="game-card-badge"><span class="badge badge-jam">Game Jam</span></div>
+          </div>
+          <div class="game-card-body">
+            <h3 class="text-xl font-bold text-white mb-1">Babushka</h3>
+            <p class="text-wafle-accent/70 text-xs uppercase tracking-wider mb-3">Simulation • Survival</p>
+            <p class="text-white/50 text-sm leading-relaxed">Play as a Russian grandmother navigating post-Soviet life
+              with cunning, recipes, and an iron will. A viral game jam hit that was quickly banned in Russia.</p>
+          </div>
+        </a>
+
+        <!-- Game: City Boiler -->
+        <a href="game-detail.html?game=city-boiler" class="game-card animate-fade-in-up" data-status="game-jam" data-genre="strategy" style="text-decoration:none;display:block;">
+          <div class="relative overflow-hidden">
+            <img src="../assets/games/city-boiler.png" alt="City Boiler" class="game-card-image" loading="lazy" />
+            <div class="game-card-overlay"></div>
+            <div class="game-card-badge"><span class="badge badge-jam">Game Jam</span></div>
+          </div>
+          <div class="game-card-body">
+            <h3 class="text-xl font-bold text-white mb-1">City Boiler</h3>
+            <p class="text-wafle-accent/70 text-xs uppercase tracking-wider mb-3">Strategy • Steampunk</p>
+            <p class="text-white/50 text-sm leading-relaxed">A steampunk city builder with dark elements. Manage heating
+              infrastructure while corruption burns hotter than any furnace.</p>
+          </div>
+        </a>
+
+        <!-- Game: Moscow Subway Driver -->
+        <a href="game-detail.html?game=moscow-subway" class="game-card animate-fade-in-up" data-status="published" data-genre="simulation" style="text-decoration:none;display:block;">
+          <div class="relative overflow-hidden">
+            <img src="../assets/games/moscow-subway.png" alt="Moscow Subway Driver" class="game-card-image"
+              loading="lazy" />
+            <div class="game-card-overlay"></div>
+            <div class="game-card-badge"><span class="badge badge-published">Published</span></div>
+          </div>
+          <div class="game-card-body">
+            <h3 class="text-xl font-bold text-white mb-1">Moscow Subway Driver</h3>
+            <p class="text-wafle-accent/70 text-xs uppercase tracking-wider mb-3">Horror • Psychological</p>
+            <p class="text-white/50 text-sm leading-relaxed">Drive through the Moscow metro and gradually discover
+              something is wrong — with the passengers, the system, and yourself.</p>
+          </div>
+        </a>
+
+        <!-- Game: Pigeon Racing VR -->
+        <a href="game-detail.html?game=pigeon-racing" class="game-card animate-fade-in-up" data-status="in-development" data-genre="sports" style="text-decoration:none;display:block;">
+          <div class="relative overflow-hidden">
+            <img src="../assets/games/pigeon-racing.png" alt="Pigeon Racing VR" class="game-card-image"
+              loading="lazy" />
+            <div class="game-card-overlay"></div>
+            <div class="game-card-badge"><span class="badge badge-dev">In Development</span></div>
+          </div>
+          <div class="game-card-body">
+            <h3 class="text-xl font-bold text-white mb-1">Pigeon Racing VR</h3>
+            <p class="text-wafle-accent/70 text-xs uppercase tracking-wider mb-3">Sports • VR</p>
+            <p class="text-white/50 text-sm leading-relaxed">Train, breed, and race pigeons in immersive VR. Competitive
+              bird racing taken to absurd new heights with pigeon-mounted cameras.</p>
+          </div>
+        </a>
+
+        <!-- Game: RobertTown -->
+        <a href="game-detail.html?game=roberttown" class="game-card animate-fade-in-up" data-status="game-jam" data-genre="adventure" style="text-decoration:none;display:block;">
+          <div class="relative overflow-hidden">
+            <img src="../assets/games/roberttown.png" alt="RobertTown" class="game-card-image" loading="lazy" />
+            <div class="game-card-overlay"></div>
+            <div class="game-card-badge"><span class="badge badge-jam">Game Jam</span></div>
+          </div>
+          <div class="game-card-body">
+            <h3 class="text-xl font-bold text-white mb-1">RobertTown</h3>
+            <p class="text-wafle-accent/70 text-xs uppercase tracking-wider mb-3">Adventure • Puzzle</p>
+            <p class="text-white/50 text-sm leading-relaxed">A spiritual successor to Machinarium set in a bizarre,
+              slightly dystopian Central European world full of quirky characters.</p>
+          </div>
+        </a>
+
+        <!-- Game: Bureaucracy Boss -->
+        <a href="game-detail.html?game=bureaucracy-boss" class="game-card animate-fade-in-up" data-status="published" data-genre="management" style="text-decoration:none;display:block;">
+          <div class="relative overflow-hidden">
+            <img src="../assets/games/bureaucracy-boss.png" alt="Bureaucracy Boss" class="game-card-image"
+              loading="lazy" />
+            <div class="game-card-overlay"></div>
+            <div class="game-card-badge"><span class="badge badge-published">Published</span></div>
+          </div>
+          <div class="game-card-body">
+            <h3 class="text-xl font-bold text-white mb-1">Bureaucracy Boss</h3>
+            <p class="text-wafle-accent/70 text-xs uppercase tracking-wider mb-3">Management • Dark Humor</p>
+            <p class="text-white/50 text-sm leading-relaxed">Rise through absurd government bureaucracy where paperwork
+              is the ultimate weapon. Inspired by Papers, Please and Tropico.</p>
+          </div>
+        </a>
+
+        <!-- Game: Exit 8: Ukrajina -->
+        <a href="game-detail.html?game=exit8-ukrajina" class="game-card animate-fade-in-up" data-status="game-jam" data-genre="horror" style="text-decoration:none;display:block;">
+          <div class="relative overflow-hidden">
+            <img src="../assets/games/exit8-ukrajina.png" alt="Exit 8: Ukrajina" class="game-card-image"
+              loading="lazy" />
+            <div class="game-card-overlay"></div>
+            <div class="game-card-badge"><span class="badge badge-jam">Game Jam</span></div>
+          </div>
+          <div class="game-card-body">
+            <h3 class="text-xl font-bold text-white mb-1">Exit 8: Ukrajina</h3>
+            <p class="text-wafle-accent/70 text-xs uppercase tracking-wider mb-3">Horror • Liminal</p>
+            <p class="text-white/50 text-sm leading-relaxed">A variation on The Exit 8 — wander a Ukrainian village and
+              figure out if the figure before you is real or an anomaly.</p>
+          </div>
+        </a>
+
+        <!-- Game: Cocaine Smuggler -->
+        <a href="game-detail.html?game=cocaine-smuggler" class="game-card animate-fade-in-up" data-status="game-jam" data-genre="horror" style="text-decoration:none;display:block;">
+          <div class="relative overflow-hidden">
+            <img src="../assets/games/cocaine-smuggler.png" alt="Cocaine Smuggler" class="game-card-image"
+              loading="lazy" />
+            <div class="game-card-overlay"></div>
+            <div class="game-card-badge"><span class="badge badge-jam">Game Jam</span></div>
+          </div>
+          <div class="game-card-body">
+            <h3 class="text-xl font-bold text-white mb-1">Cocaine Smuggler</h3>
+            <p class="text-wafle-accent/70 text-xs uppercase tracking-wider mb-3">Horror • Roguelike</p>
+            <p class="text-white/50 text-sm leading-relaxed">A dark horror roguelike about smuggling through underground
+              tunnels beneath Las Vegas. Inspired by Doom and classic roguelikes.</p>
+          </div>
+        </a>
+
+      </div>
+
+      <!-- No results message -->
+      <div id="no-results" class="hidden text-center py-20">
+        <span class="text-5xl mb-4 block">🕹️</span>
+        <p class="text-white/50 text-lg">No games match this filter.</p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════ CTA SECTION ═══════════ -->
+  <section class="section-glow relative py-20 lg:py-28">
+    <div class="mx-auto max-w-3xl px-6 text-center animate-fade-in-up">
+      <h2 class="text-3xl sm:text-4xl font-bold text-white mb-4">Want to Publish With Us?</h2>
+      <p class="text-white/50 mb-8 max-w-xl mx-auto">We're always looking for bold, unconventional indie games. If your
+        project pushes boundaries, let's talk.</p>
+      <a href="index.html#contact" class="btn-primary">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+        </svg>
+        Get in Touch
+      </a>
+    </div>
+  </section>
+
+
+  <!-- ═══════════ FOOTER ═══════════ -->
+  <footer class="border-t border-wafle-border bg-wafle-darker/80 backdrop-blur-md">
+    <div class="mx-auto max-w-6xl px-6 lg:px-8 py-12">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
+        <div>
+          <a href="index.html" class="flex items-center gap-2 mb-4">
+            <span class="text-xl">🧇</span>
+            <span class="text-lg font-bold text-white">Wafle<span class="text-wafle-accent">Gamedev</span></span>
+          </a>
+          <p class="text-white/40 text-sm leading-relaxed">Indie game studio & publisher. Bold games for bold players.
+          </p>
+        </div>
+        <div>
+          <h4 class="text-white font-bold text-sm uppercase tracking-wider mb-4">Navigate</h4>
+          <ul class="space-y-2">
+            <li><a href="index.html" class="text-white/40 text-sm hover:text-wafle-accent transition">Home</a></li>
+            <li><a href="games.html" class="text-white/40 text-sm hover:text-wafle-accent transition">Games</a></li>
+            <li><a href="index.html#about" class="text-white/40 text-sm hover:text-wafle-accent transition">About</a>
+            </li>
+            <li><a href="index.html#contact"
+                class="text-white/40 text-sm hover:text-wafle-accent transition">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-white font-bold text-sm uppercase tracking-wider mb-4">Legal</h4>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-white/40 text-sm hover:text-wafle-accent transition">Privacy Policy</a></li>
+            <li><a href="#" class="text-white/40 text-sm hover:text-wafle-accent transition">Terms of Service</a></li>
+            <li><a href="#" class="text-white/40 text-sm hover:text-wafle-accent transition">Press Kit</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-white font-bold text-sm uppercase tracking-wider mb-4">Connect</h4>
+          <ul class="space-y-2">
+            <li><a href="mailto:business@waflegamedev.com"
+                class="text-white/40 text-sm hover:text-wafle-accent transition">business@waflegamedev.com</a></li>
+            <li><a href="mailto:press@waflegamedev.com"
+                class="text-white/40 text-sm hover:text-wafle-accent transition">press@waflegamedev.com</a></li>
+            <li><a href="#" class="text-white/40 text-sm hover:text-wafle-accent transition">Discord Community</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="mt-12 pt-8 border-t border-wafle-border flex flex-col sm:flex-row items-center justify-between gap-4">
+        <p class="text-white/30 text-xs">&copy; 2026 Wafle Gamedev. All rights reserved.</p>
+        <p class="text-white/20 text-xs">Made with 🧇 and questionable taste</p>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ═══════════ SCRIPTS ═══════════ -->
+  <script>
+    // ── Mobile menu ──
+    const toggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const bar1 = document.getElementById('bar1');
+    const bar2 = document.getElementById('bar2');
+    const bar3 = document.getElementById('bar3');
+    let menuOpen = false;
+
+    toggle.addEventListener('click', () => {
+      menuOpen = !menuOpen;
+      mobileMenu.classList.toggle('open');
+      if (menuOpen) {
+        bar1.style.transform = 'rotate(45deg) translate(4px, 4px)';
+        bar2.style.opacity = '0';
+        bar3.style.transform = 'rotate(-45deg) translate(4px, -4px)';
+      } else {
+        bar1.style.transform = 'none';
+        bar2.style.opacity = '1';
+        bar3.style.transform = 'none';
+      }
+    });
+
+    function closeMobile() {
+      menuOpen = false;
+      mobileMenu.classList.remove('open');
+      bar1.style.transform = 'none';
+      bar2.style.opacity = '1';
+      bar3.style.transform = 'none';
+    }
+
+    // ── Filter system ──
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const gameCards = document.querySelectorAll('#games-grid .game-card');
+    const gameCount = document.getElementById('game-count');
+    const noResults = document.getElementById('no-results');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const filter = btn.dataset.filter;
+        let visible = 0;
+
+        gameCards.forEach(card => {
+          const status = card.dataset.status;
+          const show = filter === 'all' || status === filter;
+
+          if (show) {
+            card.style.display = '';
+            card.style.animation = 'fade-in-up 0.5s ease-out both';
+            visible++;
+          } else {
+            card.style.display = 'none';
+          }
+        });
+
+        gameCount.textContent = `Showing ${visible} game${visible !== 1 ? 's' : ''}`;
+        noResults.classList.toggle('hidden', visible > 0);
+      });
+    });
+
+    // ── Scroll animations ──
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.animationPlayState = 'running';
+          entry.target.classList.add('animate-fade-in-up');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    document.querySelectorAll('.animate-fade-in-up').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+
+</html>
