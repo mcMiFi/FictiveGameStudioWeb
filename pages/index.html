@@ -465,11 +465,11 @@
       // ── Navbar scroll effect ──
       const navbar = document.getElementById('navbar');
       let lastScroll = 0;
+      let menuOpen = false;
 
-      window.addEventListener('scroll', () => {
+      function updateNavbarBackground() {
         const currentScroll = window.pageYOffset;
-
-        if (currentScroll > 80) {
+        if (currentScroll > 80 || menuOpen) {
           navbar.style.background = 'rgba(21, 12, 31, 0.85)';
           navbar.style.backdropFilter = 'blur(20px)';
           navbar.style.borderBottom = '1px solid rgba(117, 59, 175, 0.15)';
@@ -478,8 +478,11 @@
           navbar.style.backdropFilter = 'none';
           navbar.style.borderBottom = '1px solid transparent';
         }
+      }
 
-        lastScroll = currentScroll;
+      window.addEventListener('scroll', () => {
+        updateNavbarBackground();
+        lastScroll = window.pageYOffset;
       });
 
       // ── Mobile menu toggle ──
@@ -488,11 +491,12 @@
       const bar1 = document.getElementById('bar1');
       const bar2 = document.getElementById('bar2');
       const bar3 = document.getElementById('bar3');
-      let menuOpen = false;
 
       toggle.addEventListener('click', () => {
         menuOpen = !menuOpen;
         mobileMenu.classList.toggle('open');
+        
+        updateNavbarBackground();
 
         if (menuOpen) {
           bar1.style.transform = 'rotate(45deg) translate(4px, 4px)';
@@ -511,6 +515,7 @@
         bar1.style.transform = 'none';
         bar2.style.opacity = '1';
         bar3.style.transform = 'none';
+        updateNavbarBackground();
       }
 
       // ── Intersection Observer for scroll animations ──
