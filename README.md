@@ -2,6 +2,16 @@
 Will be changed (surelly)
 
 
+## Deploy
+K dispozici je deploy script ve složce `deploy/`. 
+
+**Windows**: spusť v terminálu přímo `deploy`  
+Output z tohoto scriptu je připravený k nahrání na hosting. Script automaticky opravuje cesty adres pro produkční build.
+
+**Linux**: Vít Jarolím a jeho milovaná linux instance mají skill issue a musí si to přepsat do `.sh` souboru nebo něčeho.
+
+**Web je online**: https://waflegamedev.wasmer.app/  
+**Login k administraci**: k dispozici v Discord DMs
 
 Lore
 **Lore fiktivního herního studia:**
